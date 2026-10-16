@@ -1,0 +1,4 @@
+{
+  "notice": "Populate only after verifying your real collection and template IDs. Empty means deny all.",
+  "collections": []
+}
