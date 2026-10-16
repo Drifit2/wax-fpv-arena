@@ -1,0 +1,24 @@
+// Alpha 7.8 dependency-free regression tests for critical race safeguards.
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const vm=require('node:vm');
+const server=fs.readFileSync(path.join(__dirname,'..','server.js'),'utf8');
+const policy=require('../race-policy77');
+assert.match(server,/p\.team76LastSeq=m\.seq;p\.team76LastControlAt=Date\.now\(\)/,'sequenced input must update timestamp separately');
+assert.doesNotMatch(server,/m\.seqp\./,'regression: malformed sequence assignment');
+assert.match(server,/p\.rankedMatch\|\|rankedQueue\.includes\(p\)/,'team join must reject ranked pilots');
+assert.match(server,/p\.team72Match\|\|team72Queue\.includes\(p\)/,'ranked join must reject team pilots');
+assert.match(server,/controlSession\.account!==p\.team72Account/,'controls must be bound to authenticated wallet');
+assert.match(server,/match\.disconnected\.has\(p\.team72Account\)/,'disconnected pilots cannot control');
+const c={throttle:0.4,turn:-0.2,lift:0};
+assert.equal(policy.validControls(c,1,-1),true);
+assert.equal(policy.validControls(c,1,1),false);
+assert.equal(policy.validControls({...c,throttle:Infinity},2,1),false);
+assert.equal(policy.validControls({...c,lift:2},2,1),false);
+const fixture={status:'accepted',ready73:true,winner:null,races:[]};
+assert.equal(policy.canAwardFixture(fixture,'race-a','disconnect','red'),false);
+assert.equal(policy.canAwardFixture(fixture,'race-a','completed','red'),true);
+fixture.races.push({raceId:'race-a'});
+assert.equal(policy.canAwardFixture(fixture,'race-a','completed','red'),false);
+console.log('Alpha 7.8 regression tests passed');

@@ -1,0 +1,17 @@
+const assert=require('node:assert/strict');
+const {validControls,canAwardFixture}=require('../race-policy77');
+const c={throttle:0.5,turn:-1,lift:0};
+assert.equal(validControls(c,1,0),true);
+for(const bad of [{...c,throttle:2},{...c,turn:NaN},{...c,lift:Infinity},{throttle:0,turn:0},null])assert.equal(validControls(bad,2,1),false);
+for(const seq of [-1,0,1,1.5,Number.MAX_SAFE_INTEGER+1])assert.equal(validControls(c,seq,1),false);
+assert.equal(validControls(c,2,1),true);
+assert.equal(validControls(c,undefined,1),true);
+const f={status:'accepted',ready73:true,winner:null,races:[]};
+assert.equal(canAwardFixture(f,'race1','completed','red'),true);
+assert.equal(canAwardFixture(f,'race1','timeout','blue'),true);
+for(const reason of ['disconnect','server_restart','abandoned'])assert.equal(canAwardFixture(f,'race1',reason,'red'),false);
+assert.equal(canAwardFixture({...f,races:[{raceId:'race1'}]},'race1','completed','red'),false);
+assert.equal(canAwardFixture({...f,winner:'club1'},'race2','completed','red'),false);
+assert.equal(canAwardFixture({...f,ready73:false},'race2','completed','red'),false);
+assert.equal(canAwardFixture(f,'race2','completed',null),false);
+console.log('Alpha 7.7 policy unit tests passed');
