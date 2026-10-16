@@ -2,10 +2,9 @@ services:
   - type: web
     name: wax-fpv-arena
     runtime: node
-    plan: starter
-    buildCommand: npm ci
+    buildCommand: npm install
     startCommand: npm start
-    healthCheckPath: /lobby.html
+    healthCheckPath: /api/team75/health
     envVars:
       - key: NODE_ENV
         value: production
