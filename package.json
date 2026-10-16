@@ -1,0 +1,41 @@
+{
+  "name": "wax-fpv-arena",
+  "version": "0.9.8",
+  "private": true,
+  "description": "Browser 3D FPV racing prototype with WebSocket rooms",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node tests/unit77.js && node tests/regression76.js && node tests/regression78.js && node tests/unit82.js && node tests/leaderboard83.js && node tests/season84.js && node tests/clubwars86.js && node tests/relay88.js && node tests/relay89.js && node tests/relay90.js && node tests/relay91.js && node tests/relay92.js && node tests/relay93.js && node tests/scripts95.js && node tests/runtime95.js && node tests/lifecycle96.js && node tests/controller97.js",
+    "test:integration": "node tests/integration77.js",
+    "test:multiplayer": "node tests/integration79.js",
+    "test:lifecycle": "node tests/integration80.js",
+    "test:clubwars": "node tests/integration81.js",
+    "test:offline": "node tests/unit77.js && node tests/regression76.js && node tests/regression78.js && node tests/unit82.js && node tests/leaderboard83.js && node tests/season84.js",
+    "test:preflight": "node tests/preflight82.js",
+    "test:all-integration": "node tests/preflight82.js && node tests/integration77.js && node tests/integration79.js && node tests/integration80.js && node tests/integration81.js && node tests/integration87.js && node tests/integration93.js && node tests/integration94.js && node tests/isolation98.js",
+    "test:clubwars86": "node tests/clubwars86.js",
+    "test:4v4": "node tests/integration87.js",
+    "test:relay": "node tests/relay88.js",
+    "test:relay-fixture": "node tests/relay89.js",
+    "test:relay-checkpoints": "node tests/relay90.js",
+    "test:relay-integrity": "node tests/relay91.js",
+    "test:relay-integrity92": "node tests/relay92.js",
+    "test:relay-e2e": "node tests/integration93.js",
+    "test:navigation": "node tests/integration94.js",
+    "test:scripts": "node tests/scripts95.js",
+    "test:runtime": "node tests/runtime95.js",
+    "test:season-lifecycle": "node tests/lifecycle96.js",
+    "test:controller": "node tests/controller97.js",
+    "test:isolation": "node tests/isolation98.js"
+  },
+  "dependencies": {
+    "eosjs-ecc": "^4.0.7",
+    "ws": "^8.18.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "jsdom": "^24.1.3"
+  }
+}
