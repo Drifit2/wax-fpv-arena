@@ -777,7 +777,7 @@ if(pathname==='/api/season/config'&&req.method==='GET'){
  return jsonResponse(res,200,{season:'Founders Flight — Preview',start:null,end:null,tracks:['Canyon Sprint','Storm Circuit','Neon Slalom'],rewardStatus:'concept_only',nftRewardsMinted:false,marketplace:'https://wax.atomichub.io/',rules:'Skill-based competition. NFT ownership does not improve flight performance.'});
 }
 if(pathname==='/season.html'&&req.method==='GET'){return serveLocalFile(res,'season.html','text/html; charset=utf-8')}
-if(pathname==='/wallet.html'){return serveLocalFile(res,'wallet.html','text/html; charset=utf-8')}
+if(pathname==='/waxjs.js'&&req.method==='GET')return serveLocalFile(res,'waxjs.js','application/javascript; charset=utf-8');
 if(pathname==='/api/guest-profile' && req.method==='POST'){
  res.setHeader('content-type','application/json');res.setHeader('cache-control','no-store');
  const token=guestToken(),id=crypto.randomUUID();profiles[id]={tokenHash:crypto.createHash('sha256').update(token).digest('hex'),created:Date.now(),name:'Pilot'};saveProfiles();res.end(JSON.stringify({id,token,kind:'guest',walletVerified:false}));return;
